@@ -1,0 +1,23 @@
+diff -rupN --no-dereference libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8/apps/CMakeLists.txt libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8-new/apps/CMakeLists.txt
+--- libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8/apps/CMakeLists.txt	2020-04-05 18:40:29.000000000 +0200
++++ libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8-new/apps/CMakeLists.txt	2020-06-08 11:37:26.939014590 +0200
+@@ -195,8 +195,8 @@ if(UNIX)
+   if(WITH_PKGCONFIG)
+ 
+     set(PKGCFG_PREFIX "${CMAKE_INSTALL_PREFIX}")
+-    set(PKGCFG_INC_DIR "${LIBLAS_INCLUDE_SUBDIR}")
+-    set(PKGCFG_LIB_DIR "${LIBLAS_LIB_SUBDIR}")
++    set(PKGCFG_INC_DIR "${CMAKE_INSTALL_PREFIX}/${LIBLAS_INCLUDE_SUBDIR}")
++    set(PKGCFG_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${LIBLAS_LIB_SUBDIR}")
+     set(PKGCFG_REQUIRES  "")
+     set(PKGCFG_VERSION ${VERSION})
+     set(PKGCFG_LINK_FLAGS "-llas -llas_c")
+@@ -205,7 +205,7 @@ if(UNIX)
+       set(PKGCFG_REQUIRES "${PKGCFG_REQUIRES} libxml-2.0")
+     endif()
+     if(GEOTIFF_FOUND)
+-      set(PKGCFG_REQUIRES "${PKGCFG_REQUIRES} geotiff")
++      set(PKGCFG_REQUIRES "${PKGCFG_REQUIRES} libgeotiff")
+     endif()
+     #  if(WITH_GDAL)
+     #    set(PKGCFG_INC_DIR "${PKGCFG_INC_DIR} ${GDAL_INCLUDE_DIR}")

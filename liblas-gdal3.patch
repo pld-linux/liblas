@@ -1,0 +1,28 @@
+diff -rupN --no-dereference libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8/src/gt_wkt_srs.cpp libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8-new/src/gt_wkt_srs.cpp
+--- libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8/src/gt_wkt_srs.cpp	2020-04-05 18:40:29.000000000 +0200
++++ libLAS-d76a061f33a69a36ab116cd939c5d444b301efd8-new/src/gt_wkt_srs.cpp	2020-06-08 11:37:26.763016762 +0200
+#@@ -299,7 +299,6 @@ char *GTIFGetOGISDefn( GTIF *hGTIF, GTIF
+#                 oSRS.SetFromUserInput(pszWKT);
+#                 oSRS.SetExtension( "PROJCS", "PROJ4",
+#                                    "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs" );
+#-                oSRS.FixupOrdering();
+#                 CPLFree(pszWKT);
+#                 pszWKT = NULL;
+#                 oSRS.exportToWkt(&pszWKT);
+@@ -505,7 +504,6 @@ char *GTIFGetOGISDefn( GTIF *hGTIF, GTIF
+         {
+             char	*pszWKT;
+             oSRS.morphFromESRI();
+-            oSRS.FixupOrdering();
+             if( oSRS.exportToWkt( &pszWKT ) == OGRERR_NONE )
+                 return pszWKT;
+         }
+@@ -1107,8 +1105,6 @@ char *GTIFGetOGISDefn( GTIF *hGTIF, GTIF
+ /* ==================================================================== */
+     char	*pszWKT;
+ 
+-    oSRS.FixupOrdering();
+-
+     if( oSRS.exportToWkt( &pszWKT ) == OGRERR_NONE )
+         return pszWKT;
+     else
