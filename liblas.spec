@@ -64,6 +64,9 @@ Summary:	Header files for libLAS library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libLAS
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?with_gdal:Requires:	gdal-devel >= 1.7.0}
+Requires:	libgeotiff-devel >= 1.3.0
+Requires:	libstdc++-devel
 
 %description devel
 Header files for libLAS library.
