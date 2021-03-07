@@ -78,7 +78,7 @@ Pliki nagłówkowe biblioteki libLAS.
 Summary:	API documentation for libLAS library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libLAS
 Group:		Documentation
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 API documentation for libLAS library.
