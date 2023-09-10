@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# API documentation
 %bcond_without	gdal		# GDAL support
 %bcond_without	laszip		# LASzip support
 #
@@ -38,6 +38,8 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 %{?with_gdal:BuildRequires:	proj-devel >= 4}
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	zlib-devel
 %if %{with apidocs}
 BuildRequires:	doxygen
