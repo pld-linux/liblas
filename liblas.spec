@@ -8,7 +8,7 @@ Summary:	LAS 1.0/1.1/1.2 ASPRS LiDAR data translation toolset
 Summary(pl.UTF-8):	Narzędzia do tłumaczenia danych LiDARowych ASPRS LAS 1.0/1.1/1.2
 Name:		liblas
 Version:	1.8.1
-Release:	1
+Release:	2
 License:	BSD with Boost v1.0 and MIT parts
 Group:		Libraries
 Source0:	http://download.osgeo.org/liblas/libLAS-%{version}.tar.bz2
@@ -28,6 +28,7 @@ Patch5:		%{name}-CVE-2018-20537.patch
 # https://github.com/libLAS/libLAS/issues/181, modified
 Patch6:		%{name}-CVE-2018-20540.patch
 Patch7:		%{name}-pkgconfig.patch
+Patch8:		%{name}-cxxstd.patch
 URL:		https://liblas.org/
 BuildRequires:	boost-devel >= 1.38
 BuildRequires:	cmake >= 2.6.0
@@ -98,6 +99,7 @@ Dokumentacja API biblioteki libLAS.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 install -d build
@@ -139,6 +141,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS LICENSE.txt
 %attr(755,root,root) %{_bindir}/las2col
 %attr(755,root,root) %{_bindir}/las2las
+%if %{with gdal}
+%attr(755,root,root) %{_bindir}/las2ogr
+%endif
 %attr(755,root,root) %{_bindir}/las2pg
 %attr(755,root,root) %{_bindir}/las2txt
 %attr(755,root,root) %{_bindir}/lasblock

@@ -1,0 +1,44 @@
+--- libLAS-1.8.1/CMakeLists.txt.orig	2016-08-22 15:07:43.000000000 +0200
++++ libLAS-1.8.1/CMakeLists.txt	2023-09-10 12:15:23.194884934 +0200
+@@ -155,7 +155,7 @@ else()
+ 
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LIBLAS_COMMON_CXX_FLAGS}")
+     if (CMAKE_COMPILER_IS_GNUCXX)
+-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -ansi")
++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+     endif()
+ 
+   elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" OR "${CMAKE_CXX_COMPILER}" MATCHES "clang")
+--- libLAS-1.8.1/src/gt_citation.cpp.orig	2016-08-22 15:06:34.000000000 +0200
++++ libLAS-1.8.1/src/gt_citation.cpp	2023-09-10 12:56:50.392630898 +0200
+@@ -155,7 +155,7 @@ char* ImagineCitationTranslation(char* p
+         if(p1[0] == '\0' || p1[0] == '\n' || p1[0] == ' ')
+           p1 --;
+         p2 = p1 - 1;
+-        while( p2>0 && (p2[0] == ' ' || p2[0] == '\0' || p2[0] == '\n') )
++        while( (p2 != nullptr) && (p2[0] == ' ' || p2[0] == '\0' || p2[0] == '\n') )
+           p2--;
+         if(p2 != p1 - 1)
+           p1 = p2;
+@@ -198,7 +198,7 @@ char* ImagineCitationTranslation(char* p
+         if(p1[0] == '\0' || p1[0] == '\n' || p1[0] == ' ')
+           p1 --;
+         char* p2 = p1 - 1;
+-        while( p2>0 && (p2[0] == ' ' || p2[0] == '\0' || p2[0] == '\n') )
++        while( (p2 != nullptr) && (p2[0] == ' ' || p2[0] == '\0' || p2[0] == '\n') )
+           p2--;
+         if(p2 != p1 - 1)
+           p1 = p2;
+@@ -387,10 +387,10 @@ void SetGeogCSCitation(GTIF * psGTIF, OG
+         osCitation += primemName;
+         bRewriteGeogCitation = TRUE;
+ 
+-        double primemValue = poSRS->GetPrimeMeridian(NULL);
++        double primemValue = poSRS->GetPrimeMeridian(nullptr);
+         if(angUnitName && !EQUAL(angUnitName, "Degree"))
+         {
+-            double aUnit = poSRS->GetAngularUnits(NULL);
++            double aUnit = poSRS->GetAngularUnits(nullptr);
+             primemValue *= aUnit;
+         }
+         GTIFKeySet( psGTIF, GeogPrimeMeridianLongGeoKey, TYPE_DOUBLE, 1, 
