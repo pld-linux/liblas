@@ -1,0 +1,22 @@
+--- libLAS-1.8.1/src/gt_wkt_srs.cpp~	2024-12-15 22:20:30.000000000 +0100
++++ libLAS-1.8.1/src/gt_wkt_srs.cpp	2024-12-15 22:24:45.708903231 +0100
+@@ -90,7 +90,7 @@
+ /*                       LibgeotiffOneTimeInit()                        */
+ /************************************************************************/
+ 
+-static void* hMutex = NULL;
++static CPLMutex* hMutex = NULL;
+ 
+ void LibgeotiffOneTimeInit() 
+ {
+--- libLAS-1.8.1/apps/las2col.c~	2016-08-23 18:44:16.000000000 +0200
++++ libLAS-1.8.1/apps/las2col.c	2024-12-15 22:28:58.215576856 +0100
+@@ -1045,7 +1045,7 @@
+         fflush(files_out[i]);
+         if (verbose)
+             printf("close file %d\n", i);
+-        fsync(files_out[i]);
++        fsync((int)files_out[i]);
+         fclose(files_out[i]);
+     }
+     free(files_out);
